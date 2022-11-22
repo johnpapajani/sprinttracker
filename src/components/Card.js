@@ -82,7 +82,7 @@ export const Card = ({ id, text, index, moveCard, deleteCard, startSprint }) => 
     <div className="Card" ref={ref} style={{ opacity }} data-handler-id={handlerId}>
       <div className="NameLabel">{text}</div>
       <div className="NameButtons">
-        {index===0&&<button className="SkipButton" onClick={handleStartSprint}>Complete</button>}
+        {index===0&&<button className="SkipButton" onClick={handleStartSprint}>Start sprint</button>}
         <button className="RemoveButton" onClick={handleDeleteClick}>Remove</button>
       </div>
     </div>
