@@ -70,7 +70,7 @@ const CardList = (props) =>
 
 
     const fetchData = async () => {
-        const response = await  fetch('https://standup-6faab-default-rtdb.firebaseio.com/names.json');
+        const response = await  fetch('https://standup-6faab-default-rtdb.firebaseio.com/names/room_id=uirghdj584hg');
         
         const data = await response.json();
 
@@ -83,7 +83,7 @@ const CardList = (props) =>
 
 
     const updateCards = async (data) =>{
-      const response =  await fetch('https://standup-6faab-default-rtdb.firebaseio.com/names.json', {
+      const response =  await fetch('https://standup-6faab-default-rtdb.firebaseio.com/names/room_id=uirghdj584hg', {
         method: 'PUT',
         body: JSON.stringify(data),
         headers: {
