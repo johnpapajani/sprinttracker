@@ -4,7 +4,9 @@ import { Card } from "./Card.js";
 
 const CardList = (props) => 
   {
-    
+    const date = new Date();
+    const today = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+
     const [isMounted, setIsMounted] = useState(false)
     const [cards, setCards] = useState([]);
     const [enteredName, setEnteredName] = useState('')
@@ -50,6 +52,8 @@ const CardList = (props) =>
       setCards((prevCards) => {
         let tempCards = [...prevCards];
         let tempItem = tempCards.shift()
+        tempItem.date = today
+        console.log(tempItem)
         tempCards.push(tempItem)
 
         if (updateCards(tempCards)){
@@ -103,7 +107,7 @@ const CardList = (props) =>
         id=cards[cards.length - 1].id
       }
       setCards((prevCards) => {
-        let data = [...prevCards, {"id":id+1,"text":enteredName}]
+        let data = [...prevCards, {"id":id+1,"text":enteredName, "date":null}]
         if (updateCards(data)){
           return data
         }
@@ -139,6 +143,7 @@ const CardList = (props) =>
         moveCard={moveCard}
         deleteCard={deleteCard}
         startSprint={startSprint}
+        date={card.date}
 
         />
       );
