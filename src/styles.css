@@ -1,0 +1,320 @@
+body {
+  padding: 1em;
+  margin: 0;
+}
+
+h1 {
+  font-size: 3em;
+  user-select: none;
+}
+
+h1 span.icon {
+  display: block;
+  font-size: 2em;
+  line-height: 1em;
+  user-select: none;
+}
+
+.timer {
+  color: #000;
+  padding: 1em;
+}
+
+.timer h2 {
+  display: inline;
+  cursor: pointer;
+  font-size: 2em;
+}
+
+.timer .reset {
+  font-size: 1.333em;
+  font-weight: normal;
+  padding: 0 1ex;
+  color: #fff;
+  transition: color 0.2s ease-in-out;
+  cursor: default;
+}
+
+.timer.running .reset:hover {
+  cursor: pointer;
+}
+
+.timer.running .reset {
+  color: #000;
+}
+
+.timer.running {
+  color: #0c0;
+}
+
+.timer.running .divider {
+  /* color: #fc0; */
+}
+
+.RandomPicker {
+  font-family: sans-serif;
+  text-align: center;
+  height: calc(100vh - 2.2em);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 50px 1fr min-content;
+  justify-items: stretch;
+  gap: 0px 0px;
+  grid-template-areas:
+    "Actions"
+    "RemainingTeam"
+    "MainDisplay"
+    "Reset";
+}
+
+.team-list {
+  padding: 1ex;
+}
+.RandomPicker .team-list button {
+  width: auto;
+  min-width: auto;
+  padding: 1ex;
+  background: none;
+  margin: 0 1ex;
+  text-decoration: underline;
+  transition: color 0.2s ease-in;
+}
+.RandomPicker .team-list button:hover {
+  color: #08c;
+}
+
+.remaining-team {
+  grid-area: RemainingTeam;
+  line-height: 2em;
+}
+.actions {
+  grid-area: Actions;
+}
+.main-display {
+  grid-area: MainDisplay;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  transition: all 0.2s ease-in-out;
+  background: #eee;
+  border-radius: 1em;
+  margin: 12px 12px 12px 12px;
+}
+/* cubic-bezier( 0.68, -0.95, 0.265, 1.95 ); */
+.main-display:active {
+  margin: 16px 16px 8px 8px;
+}
+.main-display h1 {
+  line-height: 100%;
+}
+.reset {
+  grid-area: Reset;
+  margin-top: 1em;
+}
+
+.RandomPicker button {
+  /* width: 100%; */
+  min-width: 16em;
+  padding: 1em;
+  font-weight: bold;
+  border: 0;
+  user-select: none;
+  filter: saturate(60%);
+  transition: all 0.2s ease-in;
+  border-radius: 0.5em;
+}
+
+.RandomPicker button:hover {
+  filter: saturate(100%);
+  cursor: pointer;
+}
+
+.RandomPicker .button-next-random {
+  background: #080;
+  color: #fff;
+}
+
+.RandomPicker .button-reset {
+  background: #fff;
+  border: 2px solid #eee;
+  color: #888;
+}
+
+.RandomPicker .button-reset:hover {
+  border: 2px solid #a00;
+  color: #a00;
+  /* background: #a00; */
+}
+
+.RandomPicker ul {
+  width: 200px;
+}
+
+.RandomPicker li {
+  list-style: none;
+  background: #f5f5f5;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 3px;
+}
+
+.StandupLead {
+  font-family: sans-serif;
+  text-align: center;
+  height: calc(100vh - 2.2em);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 50px 1fr min-content;
+  justify-items: stretch;
+  gap: 0px 0px;
+  grid-template-areas:
+    "Actions"
+    "RemainingTeam"
+    "MainDisplay"
+    "Reset";
+}
+
+.NameList {
+  width: 30%;
+  margin: auto;
+  margin-top: 3em;
+}
+
+.Card {
+  border: 1px solid gray;
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  background-color: white;
+  cursor: pointer;
+  display: inline-flex;
+  width: 18em;
+}
+
+.NameButtons{
+  display: inline-flex;
+}
+
+.NameLabel {
+  margin: auto;
+  font-weight: bold;
+}
+
+.NameButtons button {
+  margin-left: 1em;
+  min-width: 2em;
+  border-radius: 5px;
+  color: white;
+  padding: 1em;
+  font-weight: bold;
+}
+
+.SkipButton {
+  background-color: #080;
+  border: 1px solid #080;
+}
+
+.RemoveButton {
+  background-color: #a00;
+  border: 1px solid #a00;
+
+}
+
+.NameButtons button:hover {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.SwitchPages {
+  display: inline-flex;
+  width: 100%;
+}
+
+.SwitchPages a{
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+}
+
+.SwitchPages .SwitchButtons {
+  display: inline-flex;
+  margin: auto;
+  margin-bottom: 1.5em;
+  padding: 0;
+}
+
+.SwitchButtons button {
+  list-style: none;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 3px;
+  font-family: sans-serif;
+  background: #fff;
+  border: 2px solid #eee;
+  color: #888;
+  cursor: pointer;
+}
+
+.SwitchPages .active {
+  border: 2px solid #a00;
+  color: #a00;
+}
+
+.newCardInput {
+    width: 20%;
+    margin: auto;
+    margin-top: 3em;
+}
+
+
+.newCardInput label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.newCardInput input,
+.newCardInput textarea {
+  display: block;
+  width: 100%;
+  font: inherit;
+  padding: 0.2rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.newCardInput input:focus,
+.newCardInput textarea:focus {
+  outline: none;
+  border-color: #230052;
+}
+
+
+.newCardInput button {
+  font: inherit;
+  cursor: pointer;
+  background: white;
+  border: 2px solid #a00;
+  color: #a00;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  margin-top: 1em;
+}
+
+.newCardInput button:focus {
+  outline: none;
+}
+
+.newCardInput button:hover,
+.newCardInput button:active {
+  background-color: #a00;
+  border-color: #a00;
+  color: white;
+}
+
+
+
