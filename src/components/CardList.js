@@ -2,8 +2,9 @@ import update from "immutability-helper";
 import { useCallback, useState, useEffect } from "react";
 import { Card } from "./Card.js";
 
-const CardList = () => 
+const CardList = (props) => 
   {
+    
     const [isMounted, setIsMounted] = useState(false)
     const [cards, setCards] = useState([]);
     const [enteredName, setEnteredName] = useState('')
@@ -59,6 +60,7 @@ const CardList = () =>
         }
         
       });
+      props.switchPicker()
       
     }
 
@@ -72,7 +74,7 @@ const CardList = () =>
           setCards(data)
         }
         setIsMounted(true)
-        
+
       }
 
 

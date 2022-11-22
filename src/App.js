@@ -16,7 +16,7 @@ export default function App() {
         <Route path="/" element={<SwitchPages pickerStatus={pickerIsActive} standupStatus={standupIsActive} 
         choosePicker={setpickerIsActive} chooseStandup={setstandupIsActive} />}>
           <Route index element={<RandomPicker />} />
-          <Route path="standup" element={<StandupLead />} />
+          <Route path="standup" element={<StandupLead choosePicker={setpickerIsActive} chooseStandup={setstandupIsActive}/>} />
         </Route>
       </Routes>
     </BrowserRouter>
