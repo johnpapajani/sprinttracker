@@ -323,5 +323,15 @@ h1 span.icon {
   font-size: .6em;
 }
 
+@media only screen and (max-width: 430px) {
+  .newCardInput {
+    width: 80%;
+  }
+
+  .NameList {
+    width: 100%;
+  }
+}
+
 
 
