@@ -5,7 +5,7 @@ import { Card } from "./Card.js";
 const CardList = (props) => 
   {
     const date = new Date();
-    const today = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+    const today = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
 
     const [isMounted, setIsMounted] = useState(false)
     const [cards, setCards] = useState([]);

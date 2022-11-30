@@ -84,7 +84,7 @@ export const Card = ({ id, text, index, moveCard, deleteCard, startSprint, date 
       <br></br>
       {date&&<p className="dateLabel">{date}</p>}</div>
       <div className="NameButtons">
-        {index===0&&<button className="SkipButton" onClick={handleStartSprint}>Start sprint</button>}
+        {index===0&&<button className="SkipButton" onClick={handleStartSprint}>Start standup</button>}
         <button className="RemoveButton" onClick={handleDeleteClick}>Remove</button>
       </div>
     </div>
