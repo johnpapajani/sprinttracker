@@ -242,7 +242,7 @@ const CardList = (props) =>
       <div>
         {/* <h1>Sprint lead tracker</h1> */}
         <div className="chosenQuestion">{chosenQuestion}</div>
-        <button className="questionButton" onClick={handleGenerateQuestion}>Generate question</button>
+        <button className="questionButton" onClick={handleGenerateQuestion}>Generate random question</button>
         {chosenQuestion && <button className="questionButton" onClick={handleUseQuestion}>Use question</button>}
         {isMounted && <div>
         {cards&&<div className="NameList">{cards.map((card, i) => renderCard(card, i))}</div>}
