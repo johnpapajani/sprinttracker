@@ -4,12 +4,17 @@ import { Card } from "./Card.js";
 
 const CardList = (props) => 
   {
+
     const date = new Date();
     const today = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
+    let rotDates = []
 
     const [isMounted, setIsMounted] = useState(false)
     const [cards, setCards] = useState([]);
     const [enteredName, setEnteredName] = useState('')
+    const [enteredQuestion, setEnteredQuestion] = useState('')
+    const [chosenQuestion, setChosenQuestion] = useState(null)
+    const [chosenKey, setChosenKey] = useState(null)
     
 
     const deleteCard = (id) =>{
@@ -53,7 +58,6 @@ const CardList = (props) =>
         let tempCards = [...prevCards];
         let tempItem = tempCards.shift()
         tempItem.date = today
-        console.log(tempItem)
         tempCards.push(tempItem)
 
         if (updateCards(tempCards)){
@@ -64,7 +68,6 @@ const CardList = (props) =>
         }
         
       });
-      props.switchPicker()
       
     }
 
@@ -121,14 +124,97 @@ const CardList = (props) =>
     }
 
 
+    const addQuestion = async (event) =>{
+      event.preventDefault()
+
+      const response =  await fetch('https://standup-6faab-default-rtdb.firebaseio.com/questions.json', {
+        method: 'POST',
+        body: JSON.stringify({"question":enteredQuestion}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      setEnteredQuestion('')
+    }
+
+
+    const setUpDates = () => {
+
+      let d = new Date();
+      let day = d.getDay(),
+      diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+      let start = new Date(d.setDate(diff));
+      var finish = new Date();
+      finish.setDate(start.getDate() + 4);
+
+
+      let begin = (start.getMonth()+1)+"/"+start.getDate()
+      let end = (finish.getMonth()+1)+"/"+finish.getDate()
+      let currDate = begin+" - "+end
+
+      rotDates.push(currDate)
+
+
+      for (var i = 1; i <10; i++) {
+        
+        start.setDate(start.getDate()+7);
+        finish.setDate(finish.getDate()+7);
+
+        begin = (start.getMonth()+1)+"/"+start.getDate()
+        end = (finish.getMonth()+1)+"/"+finish.getDate()
+        currDate = begin+" - "+end
+        rotDates.push(currDate)
+      }
+
+    }
+
+
     const nameInputChangeHandler = (event) => {
       setEnteredName(event.target.value);
     };
 
 
+    const questionInputChangeHandler = (event) => {
+      setEnteredQuestion(event.target.value);
+    };
+
+
+    const handleGenerateQuestion = async (event) => {
+      event.preventDefault()
+
+      const response = await  fetch('https://standup-6faab-default-rtdb.firebaseio.com/questions.json');
+        
+      const data = await response.json();
+      if (data===null){
+        return
+      }
+
+   
+      var keys = Object.keys(data);
+      let qKey = keys[ keys.length * Math.random() << 0]
+      let question = data[qKey]
+      setChosenQuestion(question.question)
+      setChosenKey(qKey)
+    }
+
+
+    const handleUseQuestion = async (event) => {
+      event.preventDefault()
+
+      const response =  await fetch(`https://standup-6faab-default-rtdb.firebaseio.com/questions/${chosenKey}.json`, {
+        method: 'DELETE',
+      });
+
+      props.pickQuestion(chosenQuestion)
+      props.switchPicker()
+    }
+
+
     useEffect(() => {
 
       fetchData()
+      setUpDates()
       
       },[]);
 
@@ -144,6 +230,7 @@ const CardList = (props) =>
         deleteCard={deleteCard}
         startSprint={startSprint}
         date={card.date}
+        rotDate={rotDates[index]}
 
         />
       );
@@ -153,10 +240,14 @@ const CardList = (props) =>
 
     return (
       <div>
-        <h1>Sprint lead tracker</h1>
+        {/* <h1>Sprint lead tracker</h1> */}
+        <div className="chosenQuestion">{chosenQuestion}</div>
+        <button className="questionButton" onClick={handleGenerateQuestion}>Generate random question</button>
+        {chosenQuestion && <button className="questionButton" onClick={handleUseQuestion}>Use question</button>}
         {isMounted && <div>
         {cards&&<div className="NameList">{cards.map((card, i) => renderCard(card, i))}</div>}
-        <form onSubmit={submitHandler}>
+        <div className="addForms">
+        <form className="standupForms" onSubmit={submitHandler}>
         <div className="newCardInput">
         <label htmlFor="name">Add new name:</label>
         <input
@@ -171,6 +262,22 @@ const CardList = (props) =>
           </button>
           </div>
       </form>
+      <form className="standupForms" onSubmit={addQuestion}>
+        <div className="newCardInput">
+        <label htmlFor="name">Add new question:</label>
+        <textarea
+          type='text'
+          id='name'
+          onChange={questionInputChangeHandler}
+          value={enteredQuestion}
+        />
+        
+          <button type="submit">
+            Add
+          </button>
+          </div>
+      </form>
+      </div>
       </div>}
       </div>
     );

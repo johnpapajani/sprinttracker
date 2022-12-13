@@ -158,7 +158,7 @@ const Timer = ({ durationSeconds = 120, onStart, onEnd }) => {
   );
 };
 
-const RandomPicker = () => {
+const RandomPicker = (props) => {
   const [person, setPerson] = useState(null);
   const [remainingTeam, setRemainingTeam] = useState(TEAM);
   const remainingLength = remainingTeam.length;
@@ -216,6 +216,7 @@ const RandomPicker = () => {
         display = <EndPrompt />;
         nextClickHandler = reset;
         nextButtonPrompt = "Reset";
+        props.resetQuestion('')
       } else {
         nextClickHandler = enterParkingLot;
         nextButtonPrompt = "Enter Parking Lot";
@@ -240,6 +241,7 @@ const RandomPicker = () => {
       </div>
       <div className="main-display" onClick={nextClickHandler}>
         {display}
+        <div>{props.dayQuestion}</div>
       </div>
       <div className="reset">
         <button className="button-reset" onClick={reset}>

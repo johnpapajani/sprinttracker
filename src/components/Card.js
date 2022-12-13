@@ -11,7 +11,7 @@ const style = {
   cursor: "pointer",
   display: "inline-flex"
 };
-export const Card = ({ id, text, index, moveCard, deleteCard, startSprint, date }) => {
+export const Card = ({ id, text, index, moveCard, deleteCard, startSprint, date, rotDate }) => {
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
     accept: "card",
@@ -82,9 +82,9 @@ export const Card = ({ id, text, index, moveCard, deleteCard, startSprint, date 
     <div className="Card" ref={ref} style={{ opacity }} data-handler-id={handlerId}>
       <div className="NameLabel">{text}
       <br></br>
-      {date&&<p className="dateLabel">{date}</p>}</div>
+      {<p className="dateLabel">{rotDate}</p>}</div>
       <div className="NameButtons">
-        {index===0&&<button className="SkipButton" onClick={handleStartSprint}>Start standup</button>}
+        {index===0&&<button className="SkipButton" onClick={handleStartSprint}>End rotation</button>}
         <button className="RemoveButton" onClick={handleDeleteClick}>Remove</button>
       </div>
     </div>
