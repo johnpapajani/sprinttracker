@@ -12,10 +12,15 @@ const StandupLead = (props) => {
     props.chooseStandup(false)
     props.choosePicker(true)
   }
+
+  const chooseDayQuestion = (question) =>{
+    console.log(question)
+    props.chooseQuestion(question)
+  }
   return (
     <div className="StandupLead">
       <DndProvider backend={HTML5Backend}>
-        <CardList switchPicker={switchPicker} />
+        <CardList switchPicker={switchPicker} pickQuestion={chooseDayQuestion}/>
       </DndProvider>
     </div>
   );
