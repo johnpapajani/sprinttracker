@@ -19,7 +19,7 @@ const TEAM = [
   "Nikitha",
   "Brian",
   "Pauline",
-  "Seonyoung"
+  "Seonyoung",
 ];
 
 /**
@@ -40,12 +40,16 @@ const StartPrompt = (props) => (
   </h1>
 );
 const EndPrompt = (props) => (
-  <h1>
-    <span className="icon" role="img" aria-label=" ">
-      🏁
-    </span>{" "}
-    Parking Lot!
-  </h1>
+  <div>
+    <h1>
+      <span className="icon" role="img" aria-label=" ">
+        🏁
+      </span>{" "}
+      Parking Lot!
+      <br></br>
+    </h1>
+    <span>Please check Unassigned tickets!</span>
+  </div>
 );
 
 const TeamMember = ({ handleOnClick, handleOnRemove, name }) => {
@@ -71,7 +75,7 @@ const TeamMember = ({ handleOnClick, handleOnRemove, name }) => {
 const TeamList = ({
   team = [],
   onClickPerson = () => {},
-  onClickRemovePerson = () => {}
+  onClickRemovePerson = () => {},
 }) => {
   return (
     <div className="team-list">
@@ -216,7 +220,7 @@ const RandomPicker = (props) => {
         display = <EndPrompt />;
         nextClickHandler = reset;
         nextButtonPrompt = "Reset";
-        props.resetQuestion('')
+        props.resetQuestion("");
       } else {
         nextClickHandler = enterParkingLot;
         nextButtonPrompt = "Enter Parking Lot";
